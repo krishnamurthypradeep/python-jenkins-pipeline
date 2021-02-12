@@ -1,9 +1,11 @@
 node('master') {
     stage("Fetch Source Code") {
-        git 'https://github.com/krishnamurthypradeep/python-jenkins-pipeline'
+        cleanWS()
+        git([url:'https://github.com/krishnamurthypradeep/python-jenkins-pipeline',branch:'add-functions-and-tests'])
     }
     
-    
+    dir('.'){
+        printMessage('Running Pipeline')
         stage("Testing") {
             sh 'python3 test_functions.py'
         }
@@ -15,6 +17,7 @@ node('master') {
             }
             
         }
+    }
         printMessage('Pipeline Complete')
     
 }
